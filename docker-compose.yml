@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  redis:
+    restart: always
+    image: redis:latest
+    command:
+    - --loglevel warning
+    volumes:
+    - $PWD/redis_data:/var/lib/redis:Z
+
+  mysql:
+      image: mysql
+      environment:
+        MYSQL_ROOT_PASSWORD: sspanel
+      volumes:
+        - $PWD/mysql_data:/var/lib/mysql:Z
+
+  ss-panel:
+      image: orvice/ss-panel
+      ports:
+        - 8080:80
+      # @todo
+      #volumes:
+      #  - $PWD/html:/var/www/html
