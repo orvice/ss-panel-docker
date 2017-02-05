@@ -8,7 +8,6 @@ services:
 build:
   stage: build
   script:
-    - export IMAGE_TAG=$(echo -en $CI_BUILD_REF_NAME | tr -c '[:alnum:]_.-' '-')
-    - docker login -u "gitlab-ci-token" -p "$CI_BUILD_TOKEN" $CI_REGISTRY
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:$IMAGE_TAG" .
-    - docker push "$CI_REGISTRY_IMAGE:$IMAGE_TAG"
+    - docker login -u "$USER" -p "$PASSWD"  
+    - docker build --pull -t "orvice/ss-panel:latest" .
+    - docker push "orvice/ss-panel:latest"
